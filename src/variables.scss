@@ -1,0 +1,10 @@
+@mixin flex($jc, $ai){
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+}
+
+$main: #1b2223;
+$sec: #3a4f50;
+$terc: #0ef6cc;
+$fourth: #f4fefd;
