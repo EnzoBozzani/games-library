@@ -1,67 +1,30 @@
-import { useState } from "react";
+import Title from "./components/Title";
+import Game from "./components/Game";
+import Form from "./components/Form";
+import useGamesCollection from "./hooks/useGameCollection";
 
 const App = () => {
-  const g: any[] = [];
-  const [games, setGames] = useState(g);
-  const [title, setTitle] = useState('');
-  const [cover, setCover] = useState('');
-
-  const addGame = (gameInfo: {title: string, cover: string}) => {
-    const game = {title: gameInfo.title, cover: gameInfo.cover};
-    setGames((currentState) => [...currentState, game]);
-  }
-
-  const handleSubmit = (ev:any) => {
-    ev.preventDefault();
-    addGame({ title, cover });
-    setTitle('');
-    setCover('');
-  }
+  const {games, addGame, removeGame} = useGamesCollection();
 
   return (
     <>
-      <p className="display-3 main-title">
-        Biblioteca de Jogos
-      </p>
-      <form onSubmit={handleSubmit}>
-        <div className="form-floating mb-3">
-          <input 
-            type="text" 
-            name="title" 
-            className="form-control" 
-            placeholder="name@example.com"
-            id="title" 
-            value={title} 
-            onChange={ev => setTitle(ev.target.value)}
-          />
-          <label htmlFor="title">Título</label>
-        </div>
-        <div className="form-floating mb-3">
-          <input 
-            type="text" 
-            className="form-control" 
-            name="cover" 
-            id="cover"
-            placeholder="name@example.com" 
-            value={cover} 
-            onChange={ev => setCover(ev.target.value)}
-          />
-          <label htmlFor="cover">Capa</label>
-        </div>
-        <button type="submit" className="btn btn-outline-primary">
-          Adicionar à Biblioteca
-        </button>
-      </form>
+      <Title/>
+      <Form addGame={addGame}/>
+      <p className="display-5">Games</p>
       <div className="games">
-        {games.map((game: any, index: number) => (
-          <div key={index}>
-            <img src={game.cover} alt="" />
-            <div>
-              <h2>{game.title}</h2>
-              <button>Remover</button>
-            </div>
-          </div>
-        ))}
+        {games.length > 0 ?
+          games.map((game: any) => (
+            <Game 
+              key={game.id}
+              title={game.title}
+              cover={game.cover}
+              onRemove={() => removeGame(game.id)}
+            />))
+            :
+            (
+              <h2>Nothing here yet! Try adding games!</h2>
+            )
+        }
       </div>
     </>
   )

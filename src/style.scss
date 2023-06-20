@@ -10,7 +10,97 @@
 #root {
     min-height: 100vh;
     background-color: $main;
-    .main-title {
-        color: $fourth;
+    @include flex(space-between, start);
+    flex-wrap: wrap;
+    .page-title {
+        flex-direction: column;
+        @include flex(center, center);
+        .main-title {
+            color: $fourth;
+            margin: 3rem 0 0 5rem;
+        }
+        img {
+            width: 50%;
+        }
+    }
+
+    form {
+        width: 40%;
+        border: 2px solid $fourth;
+        border-radius: 10px;
+        margin: 3rem 5rem 0 0;
+        fieldset {
+            width: 100%;
+            @include flex(center, center);
+            flex-direction: column;
+            padding: 2rem 0;
+            legend {
+                color: $fourth;
+                margin-bottom: 2rem;
+            }
+            div {
+                width: 80%;
+                #title {
+                    background-color: $sec;
+                    border: 1px solid $fourth;
+                    border-radius: 5px;
+                    width: 100%;
+                    padding: .5rem;
+                    color: $fourth;
+                }
+                #basic-url {
+                    background-color: $sec;
+                    color: $fourth;
+                }
+                label {
+                    color: $fourth;
+                    margin-bottom: .7rem;
+                }
+                span {
+                    background-color: $sec;
+                    border-color: $fourth;
+                    color: $fourth;
+                }
+            }
+        }
+
+        .add-btn {
+            color: $terc;
+            border-color: $terc;
+
+            &:hover {
+                background-color: $terc;
+                color: $main;
+            }
+        }
+    }
+
+    .games {
+        margin-top: 5rem;
+        padding: 0 5rem;
+        width: 100%;
+        @include flex(start, start);
+        gap: 5rem;
+        flex-wrap: wrap;
+        .game {
+            height: 258px;
+            width: 45%;
+            border: 2px solid $terc;
+            border-radius: 20px;
+            @include flex(start, center);
+            gap: 20px;
+            background-color: $sec;
+            img {
+                width: 50%;
+                border-radius: 20px;
+            }
+            div {
+                width: 50%;
+                @include flex(start, center);
+                gap: .6rem;
+                flex-direction: column;
+                color: $fourth;
+            }
+        }
     }
 }
